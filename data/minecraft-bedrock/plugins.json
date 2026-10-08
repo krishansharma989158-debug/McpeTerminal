@@ -1,0 +1,284 @@
+[
+  {
+    "id": "landclaim-pro",
+    "name": "Land Claim & Grief Prevention Pro",
+    "version": "v3.2.0",
+    "category": "security",
+    "description": "100% Anti-Theft territorial land protection, multi-partner trust system, and automatic chest lock.",
+    "detailedUse": "यह खिलाड़ियों के बेस, घर और फार्म को गैर-अधिकृत लोगों की तोड़फोड़ और लूट से बचाता है। अजनबी खिलाड़ी बेस में घुसने पर कोई चेस्ट नहीं खोल सकते और न ही ब्लॉक तोड़ सकते हैं।",
+    "howToUse": [
+      "1. अपने बेस में खड़े होकर चैट में /claim [radius] टाइप करें।",
+      "2. अपने दोस्तों को /trust <player> के जरिए पार्टनर बनाएं।",
+      "3. जब किसी पार्टनर को हटाना हो तो /untrust करें, वह तुरंत विजिटर बन जाएगा।",
+      "4. जमीन की पूरी जानकारी देखने के लिए /claiminfo चलाएं।"
+    ],
+    "commands": [
+      {
+        "command": "/claim [radius]",
+        "description": "अपनी जगह पर लैंड क्लेम बनाएं",
+        "role": "Player"
+      },
+      {
+        "command": "/trust <player>",
+        "description": "दोस्त को पार्टनर का एक्सेस दें",
+        "role": "Owner"
+      },
+      {
+        "command": "/untrust <player>",
+        "description": "पार्टनर का एक्सेस तुरंत छीन लें",
+        "role": "Owner"
+      },
+      {
+        "command": "/claiminfo",
+        "description": "जमीन की पूरी जानकारी और ट्रस्टेड लिस्ट देखें",
+        "role": "Player"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 2.4,
+    "author": "Bedrock Security Lab",
+    "badge": "Installed & Active",
+    "rating": 5.0
+  },
+  {
+    "id": "warden-anticheat",
+    "name": "Warden Anti-Cheat Guard",
+    "version": "v2.8.4",
+    "category": "security",
+    "description": "Real-time anti-speed, anti-fly, packet exploit patcher, and anti-xray diamond shield.",
+    "detailedUse": "यह सर्वर में हैकिंग करने वाले खिलाड़ियों (Speed hack, Fly hack, X-Ray, Auto-Clicker) को अपने-आप पकड़कर फ्रीज या बैन करता है।",
+    "howToUse": [
+      "1. प्लगइन को इनेबल रखें।",
+      "2. जब भी कोई हैक का उपयोग करेगा तो कंसोल में रेड अलर्ट आएगा।",
+      "3. चैट में /freeze <player> या /ban <player> का उपयोग करके हैकर्स को रोकें।"
+    ],
+    "commands": [
+      {
+        "command": "/freeze <player>",
+        "description": "हैक करने वाले खिलाड़ी को एक जगह जमा दें",
+        "role": "Admin"
+      },
+      {
+        "command": "/unfreeze <player>",
+        "description": "खिलाड़ी को अनफ्रीज करें",
+        "role": "Admin"
+      },
+      {
+        "command": "/anticheat status",
+        "description": "एंटी-चीट मॉनिटरिंग रिपोर्ट देखें",
+        "role": "Admin"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 1.8,
+    "author": "Mojang BDS Security",
+    "badge": "Core Guard",
+    "rating": 4.9
+  },
+  {
+    "id": "economy-shop",
+    "name": "Economy & Shopkeepers PE",
+    "version": "v4.1.2",
+    "category": "economy",
+    "description": "Scoreboard virtual emerald economy, player wallet balances, and customizable NPC trader shops.",
+    "detailedUse": "सर्वर में पैसे (Coins/Emeralds) की अर्थव्यवस्था चालू करने के लिए। खिलाड़ी ब्लॉक बेचकर पैसे कमा सकते हैं और शॉप से दुर्लभ सामान खरीद सकते हैं।",
+    "howToUse": [
+      "1. चैट में /balance से अपना बैलेंस देखें।",
+      "2. /pay <player> <amount> से दोस्त को पैसे ट्रांसफर करें।",
+      "3. /shop से सर्वर का वर्चुअल मार्केट खोलें।"
+    ],
+    "commands": [
+      {
+        "command": "/balance",
+        "description": "अपना कुल बैलेंस देखें",
+        "role": "Player"
+      },
+      {
+        "command": "/pay <player> <amount>",
+        "description": "दूसरे खिलाड़ी को पैसे भेजें",
+        "role": "Player"
+      },
+      {
+        "command": "/eco give <player> <amount>",
+        "description": "एडमिन द्वारा खिलाड़ी को पैसे देना",
+        "role": "Admin"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 3.1,
+    "author": "CraftEconomy Team",
+    "badge": "SMP Economy",
+    "rating": 4.8
+  },
+  {
+    "id": "clan-factions",
+    "name": "Clan & Faction Wars",
+    "version": "v2.5.0",
+    "category": "gameplay",
+    "description": "Create player guilds, alliances, clan private chat, and team war rankings.",
+    "detailedUse": "खिलाड़ियों को अपनी टीम या क्लैन बनाने, क्लैन चैट करने और दूसरी टीमों के साथ मुकाबला करने की सुविधा देता है।",
+    "howToUse": [
+      "1. /clan create <name> से अपना नया क्लैन बनाएं।",
+      "2. /clan invite <player> से दोस्तों को क्लैन में जोड़ें।",
+      "3. /clan chat से सिर्फ अपनी टीम से बात करें।"
+    ],
+    "commands": [
+      {
+        "command": "/clan create <name>",
+        "description": "नया क्लैन रजिस्टर करें",
+        "role": "Player"
+      },
+      {
+        "command": "/clan invite <player>",
+        "description": "दोस्त को क्लैन में न्योता दें",
+        "role": "Leader"
+      },
+      {
+        "command": "/clan list",
+        "description": "सर्वर के सभी क्लैन्स देखें",
+        "role": "Player"
+      }
+    ],
+    "installed": true,
+    "enabled": false,
+    "sizeMb": 4.2,
+    "author": "Bedrock Guilds",
+    "badge": "Multiplayer",
+    "rating": 4.7
+  },
+  {
+    "id": "fastbuilder-we",
+    "name": "FastBuilder & WorldEdit Bedrock",
+    "version": "v5.0.1",
+    "category": "world",
+    "description": "Instant sphere generation, //set block commands, brush tools, and fast mass building.",
+    "detailedUse": "बड़े-बड़े महल, दीवारें या गड्ढे चुटकियों में बनाने के लिए। एक-एक ब्लॉक लगाने की जरूरत नहीं होती।",
+    "howToUse": [
+      "1. चैट में //wand टाइप करके सेलेक्शन कुल्हाड़ी प्राप्त करें।",
+      "2. दो कोनों पर क्लिक करके एरिया सेलेक्ट करें।",
+      "3. //set stone या //sphere glass 10 कमांड चलाएं।"
+    ],
+    "commands": [
+      {
+        "command": "//wand",
+        "description": "सेलेक्शन टूल प्राप्त करें",
+        "role": "Admin"
+      },
+      {
+        "command": "//set <block>",
+        "description": "चुने गए एरिया को तुरंत ब्लॉक से भरें",
+        "role": "Admin"
+      },
+      {
+        "command": "//sphere <block> <radius>",
+        "description": "गोल गोलाकार संरचना बनाएं",
+        "role": "Admin"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 5.6,
+    "author": "BuilderCraft PE",
+    "badge": "Creative & Admin",
+    "rating": 4.9
+  },
+  {
+    "id": "essentials-warps",
+    "name": "Essentials & Teleport Warps",
+    "version": "v3.7.0",
+    "category": "admin",
+    "description": "/home, /spawn, /tpa, /tpaccept, and player back-to-death teleportation system.",
+    "detailedUse": "खिलाड़ियों को अपने घर सेट करने (/sethome), स्पॉन पर जाने (/spawn) और एक-दूसरे के पास टेलीपोर्ट होने (/tpa) की सुविधा देता है।",
+    "howToUse": [
+      "1. अपने घर पर खड़े होकर /sethome लिखें।",
+      "2. कहीं भी भटकने पर /home लिखकर तुरंत घर लौट आएं।",
+      "3. दोस्त के पास जाने के लिए /tpa <friend> भेजें।"
+    ],
+    "commands": [
+      {
+        "command": "/sethome [name]",
+        "description": "मौजूदा जगह को होम सेट करें",
+        "role": "Player"
+      },
+      {
+        "command": "/home [name]",
+        "description": "अपने होम पर तुरंत टेलीपोर्ट हों",
+        "role": "Player"
+      },
+      {
+        "command": "/spawn",
+        "description": "सर्वर के मुख्य स्पॉन पर जाएं",
+        "role": "Player"
+      },
+      {
+        "command": "/tpa <player>",
+        "description": "टेलीपोर्ट की रिक्वेस्ट भेजें",
+        "role": "Player"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 2.1,
+    "author": "EssentialsBedrock",
+    "badge": "Must Have",
+    "rating": 5
+  },
+  {
+    "id": "clearlag-optimizer",
+    "name": "Auto-Clear Lag & Entity Sweeper",
+    "version": "v2.2.1",
+    "category": "optimization",
+    "description": "Automatic ground item cleaner, mob animation lag patcher, and TPS stabilizer.",
+    "detailedUse": "सर्वर से लैग खत्म करने के लिए। जब जमीन पर बहुत ज्यादा ब्लॉक्स या मॉब जमा हो जाते हैं तो यह उन्हें साफ करके टीपीएस 20 पर रखता है।",
+    "howToUse": [
+      "1. यह हर 15 मिनट में ऑटोमैटिकली वार्निंग देकर जमीन का कचरा हटाता है।",
+      "2. कभी भी तुरंत लैग हटाने के लिए चैट में /clearlag चलाएं।"
+    ],
+    "commands": [
+      {
+        "command": "/clearlag",
+        "description": "जमीन पर गिरे आवारा सामान तुरंत साफ करें",
+        "role": "Admin"
+      },
+      {
+        "command": "/tps",
+        "description": "लाइव सर्वर स्पीड (Ticks Per Second) जांचें",
+        "role": "Player"
+      }
+    ],
+    "installed": true,
+    "enabled": true,
+    "sizeMb": 1.2,
+    "author": "LagFree Devs",
+    "badge": "Performance",
+    "rating": 4.8
+  },
+  {
+    "id": "death-gravestone",
+    "name": "GraveStone & Death Loot Keeper",
+    "version": "v1.9.0",
+    "category": "gameplay",
+    "description": "Spawns a locked tombstone on player death with GPS death coordinates to prevent item despawn.",
+    "detailedUse": "जब कोई खिलाड़ी मर जाता है, तो उसका सामान जमीन पर बिखर कर खोता नहीं है, बल्कि एक सुरक्षित ग्रेव चेस्ट में बंद हो जाता है जिसे सिर्फ वही खोल सकता है।",
+    "howToUse": [
+      "1. मरने पर चैट में तुरंत डेथ लोकेशन का X, Y, Z कोऑर्डिनेट्स दिखेगा।",
+      "2. वहां जाकर अपनी कब्र (Gravestone) पर क्लिक करें, सारा सामान वापस मिल जाएगा।"
+    ],
+    "commands": [
+      {
+        "command": "/grave locate",
+        "description": "अपनी आखिरी मौत की जगह का रास्ता देखें",
+        "role": "Player"
+      }
+    ],
+    "installed": false,
+    "enabled": false,
+    "sizeMb": 1.5,
+    "author": "GraveGuard Studios",
+    "badge": "Anti-Rage",
+    "rating": 4.6
+  }
+]

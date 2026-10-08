@@ -1,0 +1,10 @@
+{
+  "texturepackRequired": true,
+  "antiCheatAutoBan": true,
+  "antiDuplication": true,
+  "serverAuthoritativeMovement": "client-auth",
+  "serverAuthoritativeBlockBreaking": false,
+  "allowCheats": false,
+  "defaultPermissionLevel": "member",
+  "bannedPlayersCount": 0
+}

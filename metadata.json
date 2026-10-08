@@ -1,0 +1,8 @@
+{
+  "name": "Remix Bedrock Server Panel",
+  "description": "Ubuntu RDP Terminal & Process Monitor with PaperMC Bukkit server and GeyserMC Bedrock crossplay bridge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  bedrock-panel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bedrock_server_panel
+    ports:
+      - "3000:3000"       # Web Control Panel (Aternos-like)
+      - "19132:19132/udp" # Minecraft Bedrock Default Port
+      - "6080:6080"       # noVNC Ubuntu GUI Desktop
+    environment:
+      - PORT=3000
+      - BEDROCK_PORT=19132
+      - NOVNC_PORT=6080
+    volumes:
+      - mc_data:/minecraft-bedrock/worlds
+      - mc_backups:/minecraft-bedrock/backups
+      - playit_data:/root/.config/playit
+    restart: unless-stopped
+
+volumes:
+  mc_data:
+  mc_backups:
+  playit_data:

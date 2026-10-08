@@ -1,0 +1,26 @@
+{
+  "Admin": {
+    "gamertag": "Admin",
+    "initialBlocks": 100,
+    "accruedBlocks": 0,
+    "bonusBlocks": 30,
+    "usedBlocks": 0,
+    "playtimeMinutes": 0
+  },
+  "Steve": {
+    "gamertag": "Steve",
+    "initialBlocks": 100,
+    "accruedBlocks": 50,
+    "bonusBlocks": -30,
+    "usedBlocks": 0,
+    "playtimeMinutes": 30
+  },
+  "Alex": {
+    "gamertag": "Alex",
+    "initialBlocks": 100,
+    "accruedBlocks": 120,
+    "bonusBlocks": 0,
+    "usedBlocks": 0,
+    "playtimeMinutes": 72
+  }
+}

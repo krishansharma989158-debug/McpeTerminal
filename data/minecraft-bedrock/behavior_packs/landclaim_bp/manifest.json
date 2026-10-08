@@ -1,0 +1,26 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Land Claim & Grief Prevention Pro Plugin",
+    "description": "100% Anti-Theft territorial protection, multi-partner trust system, and automatic chest lock for Minecraft Bedrock Dedicated Server.",
+    "uuid": "4c8f2b70-13a8-4e89-a2e6-9923838393c0",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 0]
+  },
+  "modules": [
+    {
+      "description": "Land Claim Script Module",
+      "type": "script",
+      "language": "javascript",
+      "uuid": "7e1b5d92-6284-4e78-9e64-f90ad5f70001",
+      "version": [1, 0, 0],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.8.0"
+    }
+  ]
+}
