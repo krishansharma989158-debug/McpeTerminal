@@ -63,6 +63,31 @@ export default function App() {
     return () => clearInterval(interval);
   }, [fetchHistory, fetchSystemMetrics]);
 
+  // Sync exact viewport height for mobile keyboards, URL address bars and notches
+  useEffect(() => {
+    const updateViewport = () => {
+      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      document.documentElement.style.setProperty('--app-vh', `${vh}px`);
+    };
+
+    updateViewport();
+    window.addEventListener('resize', updateViewport);
+    window.addEventListener('orientationchange', updateViewport);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateViewport);
+      window.visualViewport.addEventListener('scroll', updateViewport);
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateViewport);
+      window.removeEventListener('orientationchange', updateViewport);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', updateViewport);
+        window.visualViewport.removeEventListener('scroll', updateViewport);
+      }
+    };
+  }, []);
+
   // Execute Command with Real-Time Streaming Logs (Instant output for apt install, updates, builds, scripts)
   const handleExecute = async (command: string) => {
     setIsExecuting(true);
@@ -180,12 +205,16 @@ export default function App() {
   };
 
   return (
-    <div className="h-[100dvh] h-screen w-full max-w-full overflow-hidden bg-[#09090b] text-zinc-100 flex flex-col font-sans select-none fixed inset-0">
+    <div
+      style={{ height: 'var(--app-vh, 100dvh)' }}
+      className="fixed inset-0 w-full max-w-full overflow-hidden bg-[#09090b] text-zinc-100 flex flex-col font-sans select-none"
+    >
       {/* Mobile Top Bar */}
       <MobileTopBar
         system={system}
         onOpenAi={() => {
           setInitialAiError(null);
+          setAiInitialTab('suggest');
           setIsAiOpen(true);
         }}
         onOpenProcesses={() => setIsProcessOpen(true)}
@@ -197,7 +226,7 @@ export default function App() {
       />
 
       {/* Main Mobile Terminal Screen */}
-      <main className="flex-1 overflow-hidden relative">
+      <main className="flex-1 min-h-0 w-full flex flex-col overflow-hidden relative">
         <MobileTerminalView
           history={history}
           currentCwd={currentCwd}
