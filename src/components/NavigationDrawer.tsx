@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Folder, Sparkles, Activity, X, ChevronRight, HardDrive, Cpu, Play, DownloadCloud, FileCode } from 'lucide-react';
+import { Terminal, Folder, Sparkles, Activity, X, ChevronRight, HardDrive, Cpu, Play, DownloadCloud, FileCode, Key } from 'lucide-react';
 import { SystemMetrics } from '../types';
 
 interface NavigationDrawerProps {
@@ -8,6 +8,7 @@ interface NavigationDrawerProps {
   onOpenTerminal: () => void;
   onOpenFileManager: () => void;
   onOpenAi: () => void;
+  onOpenAiSettings?: () => void;
   onOpenProcesses: () => void;
   system: SystemMetrics | null;
   currentCwd: string;
@@ -21,6 +22,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   onOpenTerminal,
   onOpenFileManager,
   onOpenAi,
+  onOpenAiSettings,
   onOpenProcesses,
   system,
   currentCwd,
@@ -140,6 +142,30 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-purple-500/70" />
+          </button>
+
+          {/* Set Gemini API Key */}
+          <button
+            onClick={() => {
+              if (onOpenAiSettings) {
+                onOpenAiSettings();
+              } else {
+                onOpenAi();
+              }
+              onClose();
+            }}
+            className="w-full p-2.5 rounded-xl bg-zinc-900/60 hover:bg-zinc-900 text-zinc-200 border border-zinc-800/80 flex items-center justify-between transition active:scale-98 text-left"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-purple-950/70 text-purple-300 border border-purple-800/60 flex items-center justify-center">
+                <Key className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="font-bold text-xs block text-zinc-200">Set Gemini API Key</span>
+                <span className="text-[10px] text-zinc-400">Configure free key for deployment</span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-zinc-600" />
           </button>
 
           {/* Background Scripts & Tasks */}

@@ -310,7 +310,7 @@ export const FileManagerModal: React.FC<FileManagerModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <div className="bg-[#0e0e14] border-t sm:border border-zinc-800 rounded-t-2xl sm:rounded-2xl max-w-xl w-full max-h-[92vh] h-[88vh] flex flex-col overflow-hidden shadow-2xl font-mono text-xs">
+      <div className="bg-[#0e0e14] border-t sm:border border-zinc-800 rounded-t-2xl sm:rounded-2xl max-w-xl w-full max-h-[92dvh] h-[88dvh] flex flex-col overflow-hidden shadow-2xl font-mono text-xs">
         {/* Top Header */}
         <div className="bg-[#14141c] p-3.5 border-b border-zinc-800 flex items-center justify-between">
           <div className="flex items-center gap-2">

@@ -20,6 +20,7 @@ export default function App() {
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [isProcessOpen, setIsProcessOpen] = useState(false);
   const [initialAiError, setInitialAiError] = useState<{ command: string; errorOutput: string } | null>(null);
+  const [aiInitialTab, setAiInitialTab] = useState<'suggest' | 'fix' | 'chat' | 'settings'>('suggest');
 
   // Fetch Terminal History
   const fetchHistory = useCallback(async () => {
@@ -179,7 +180,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-screen max-w-full overflow-hidden bg-[#09090b] text-zinc-100 flex flex-col font-sans select-none">
+    <div className="h-[100dvh] h-screen w-full max-w-full overflow-hidden bg-[#09090b] text-zinc-100 flex flex-col font-sans select-none fixed inset-0">
       {/* Mobile Top Bar */}
       <MobileTopBar
         system={system}
@@ -220,6 +221,12 @@ export default function App() {
         onOpenFileManager={() => setIsFileManagerOpen(true)}
         onOpenAi={() => {
           setInitialAiError(null);
+          setAiInitialTab('suggest');
+          setIsAiOpen(true);
+        }}
+        onOpenAiSettings={() => {
+          setInitialAiError(null);
+          setAiInitialTab('settings');
           setIsAiOpen(true);
         }}
         onOpenProcesses={() => setIsProcessOpen(true)}
@@ -246,6 +253,7 @@ export default function App() {
         }}
         onRunCommand={(cmd) => handleExecute(cmd)}
         initialError={initialAiError}
+        initialTab={aiInitialTab}
         currentCwd={currentCwd}
       />
 

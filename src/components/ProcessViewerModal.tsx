@@ -125,7 +125,7 @@ export const ProcessViewerModal: React.FC<ProcessViewerModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <div className="bg-[#0e0e14] border-t sm:border border-zinc-800 rounded-t-2xl sm:rounded-2xl max-w-lg w-full max-h-[90vh] h-[85vh] flex flex-col overflow-hidden shadow-2xl animate-in slide-in-from-bottom-5">
+      <div className="bg-[#0e0e14] border-t sm:border border-zinc-800 rounded-t-2xl sm:rounded-2xl max-w-lg w-full max-h-[92dvh] h-[88dvh] flex flex-col overflow-hidden shadow-2xl animate-in slide-in-from-bottom-5">
         {/* Header */}
         <div className="bg-[#14141c] p-3.5 border-b border-zinc-800 flex items-center justify-between">
           <div className="flex items-center gap-2">

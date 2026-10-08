@@ -9,18 +9,30 @@ import http from 'http';
 import AdmZip from 'adm-zip';
 import { GoogleGenAI } from '@google/genai';
 
-// Initialize Gemini AI Client (Model: gemini-3.5-flash-lite / gemini-flash-lite-latest from user active models)
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      'User-Agent': 'aistudio-build',
+// Configured user API key in memory if changed via Settings/UI in deployed environments
+let customGeminiApiKey = process.env.GEMINI_API_KEY || '';
+
+// Get or create Gemini client using available key
+function getGeminiClient(userKey?: string): GoogleGenAI {
+  const activeKey = (userKey && userKey.trim()) || customGeminiApiKey || process.env.GEMINI_API_KEY;
+  return new GoogleGenAI({
+    apiKey: activeKey,
+    httpOptions: {
+      headers: {
+        'User-Agent': 'aistudio-build',
+      },
     },
-  },
-});
+  });
+}
 
 // Helper for AI generation using Gemini free tier compatible models
-async function callGeminiAi(prompt: string, systemInstruction?: string): Promise<string> {
+async function callGeminiAi(prompt: string, systemInstruction?: string, userKey?: string): Promise<string> {
+  const activeKey = (userKey && userKey.trim()) || customGeminiApiKey || process.env.GEMINI_API_KEY;
+  if (!activeKey) {
+    throw new Error('Gemini API Key is not set. Please set your free Gemini API Key in the AI Copilot settings.');
+  }
+
+  const client = getGeminiClient(activeKey);
   const modelsToTry = [
     'gemini-3.8-flash',
     'gemini-flash-latest',
@@ -30,7 +42,7 @@ async function callGeminiAi(prompt: string, systemInstruction?: string): Promise
   let lastError: any = null;
   for (const model of modelsToTry) {
     try {
-      const response = await ai.models.generateContent({
+      const response = await client.models.generateContent({
         model,
         contents: prompt,
         config: systemInstruction ? { systemInstruction } : undefined,
@@ -674,12 +686,56 @@ app.get('/api/system/install-status', (req, res) => {
 
 // -------------------------------------------------------------
 // Gemini AI Assistant Endpoints
-// (Uses gemini-3.5-flash-lite / gemini-flash-lite-latest from user active models)
+// (Uses gemini-3.8-flash, gemini-flash-latest, etc.)
 // -------------------------------------------------------------
+
+// Check API Key Status
+app.get('/api/ai/key-status', (req, res) => {
+  const activeKey = customGeminiApiKey || process.env.GEMINI_API_KEY || '';
+  const isSet = Boolean(activeKey && activeKey.trim().length > 0);
+  const isFromEnv = Boolean(process.env.GEMINI_API_KEY && !customGeminiApiKey);
+  const maskedKey = isSet
+    ? `${activeKey.slice(0, 4)}••••••••${activeKey.slice(-4)}`
+    : '';
+
+  res.json({
+    isConfigured: isSet,
+    source: isFromEnv ? 'env' : (customGeminiApiKey ? 'user' : 'none'),
+    maskedKey,
+    model: 'gemini-3.8-flash'
+  });
+});
+
+// Set or Update Gemini API Key (e.g. for self-deployed instances or custom keys)
+app.post('/api/ai/set-key', (req, res) => {
+  const { apiKey } = req.body;
+  if (!apiKey || typeof apiKey !== 'string' || apiKey.trim().length === 0) {
+    // If empty string sent, revert to env key if present
+    customGeminiApiKey = '';
+    const hasEnv = Boolean(process.env.GEMINI_API_KEY);
+    return res.json({
+      success: true,
+      message: hasEnv ? 'Reverted to environment GEMINI_API_KEY' : 'API Key cleared',
+      isConfigured: hasEnv
+    });
+  }
+
+  const cleanKey = apiKey.trim();
+  customGeminiApiKey = cleanKey;
+  // Also keep process.env updated so other parts see it
+  process.env.GEMINI_API_KEY = cleanKey;
+
+  res.json({
+    success: true,
+    message: 'Gemini API Key successfully saved and active!',
+    isConfigured: true,
+    maskedKey: `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}`
+  });
+});
 
 // AI Command Suggestion
 app.post('/api/ai/suggest', async (req, res) => {
-  const query = req.body.query;
+  const { query, apiKey } = req.body;
   if (!query || typeof query !== 'string') {
     return res.status(400).json({ error: 'Query is required' });
   }
@@ -697,7 +753,7 @@ Format your response as:
 COMMAND: <the command here>
 EXPLANATION: <brief explanation here>`;
 
-    const text = await callGeminiAi(prompt, 'You are an Ubuntu Linux terminal expert assistant on mobile. Respond concisely.');
+    const text = await callGeminiAi(prompt, 'You are an Ubuntu Linux terminal expert assistant on mobile. Respond concisely.', apiKey);
     
     // Parse command and explanation
     let command = '';
@@ -733,7 +789,7 @@ EXPLANATION: <brief explanation here>`;
 
 // AI Error Fixer
 app.post('/api/ai/fix-error', async (req, res) => {
-  const { command, errorOutput } = req.body;
+  const { command, errorOutput, apiKey } = req.body;
   if (!errorOutput && !command) {
     return res.status(400).json({ error: 'Command and errorOutput are required' });
   }
@@ -755,7 +811,7 @@ REASON: <1 sentence reason>
 FIX_COMMAND: <exact command to run to fix it>
 EXPLANATION: <short explanation>`;
 
-    const text = await callGeminiAi(prompt, 'You are a fast Ubuntu Linux error troubleshooting expert on mobile.');
+    const text = await callGeminiAi(prompt, 'You are a fast Ubuntu Linux error troubleshooting expert on mobile.', apiKey);
 
     let fixCommand = '';
     let reason = '';
@@ -788,7 +844,7 @@ EXPLANATION: <short explanation>`;
 
 // AI Chat
 app.post('/api/ai/chat', async (req, res) => {
-  const { message, history } = req.body;
+  const { message, history, apiKey } = req.body;
   if (!message || typeof message !== 'string') {
     return res.status(400).json({ error: 'Message is required' });
   }
@@ -804,7 +860,7 @@ Current working directory: ${currentWorkingDir}
 
 Help the user with their Ubuntu terminal, Linux commands, servers (PaperMC, Geyser, Docker, scripts, package management) or any task. If you give a terminal command, wrap it in a single markdown code block like \`\`\`bash\ncommand\n\`\`\` so they can 1-tap execute it. Keep answers concise, clear, and mobile-friendly.`;
 
-    const text = await callGeminiAi(prompt, 'You are an intelligent, friendly Ubuntu Linux and server assistant on mobile. You answer questions directly and provide exact terminal commands.');
+    const text = await callGeminiAi(prompt, 'You are an intelligent, friendly Ubuntu Linux and server assistant on mobile. You answer questions directly and provide exact terminal commands.', apiKey);
 
     res.json({ reply: text });
   } catch (err: any) {

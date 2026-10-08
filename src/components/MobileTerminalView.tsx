@@ -164,7 +164,7 @@ export const MobileTerminalView: React.FC<MobileTerminalViewProps> = ({
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-62px)] bg-[#09090d] text-zinc-200 select-text font-mono text-xs overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-[#09090d] text-zinc-200 select-text font-mono text-xs overflow-hidden">
       {/* Terminal Output Stream Area */}
       <div className="flex-1 p-3 overflow-y-auto space-y-3 font-mono text-[11px] sm:text-xs">
         {/* Welcome Message */}
@@ -447,7 +447,7 @@ export const MobileTerminalView: React.FC<MobileTerminalViewProps> = ({
       </div>
 
       {/* Terminal Input Bar */}
-      <form onSubmit={handleSubmit} className="p-2 bg-zinc-950 border-t border-zinc-800 flex items-center gap-1.5 shrink-0">
+      <form onSubmit={handleSubmit} className="p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-zinc-950 border-t border-zinc-800 flex items-center gap-1.5 shrink-0">
         <div className="text-red-500 font-bold select-none text-xs pl-1">
           $
         </div>

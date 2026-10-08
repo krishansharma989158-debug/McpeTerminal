@@ -26,7 +26,7 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
   const shortCwd = currentCwd === '/root' ? '~' : currentCwd.replace(/^\/root/, '~');
 
   return (
-    <header className="bg-zinc-950 border-b border-zinc-800 px-2.5 py-2 sticky top-0 z-30 flex items-center justify-between gap-1.5 shadow-md">
+    <header className="bg-zinc-950 border-b border-zinc-800 px-2.5 pt-[max(0.5rem,env(safe-area-inset-top))] pb-2 sticky top-0 z-30 flex items-center justify-between gap-1.5 shadow-md shrink-0">
       {/* Left: Menu/Drawer Toggle & Prompt */}
       <div className="flex items-center gap-2 min-w-0">
         {/* Drawer 'More' hamburger button */}
